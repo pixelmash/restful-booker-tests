@@ -37,7 +37,11 @@ export const testData = {
             bookingdates: {
                 checkin: '2026-09-01',
                 checkout: '2026-09-08'
-            }
+            },
+        },
+        partially_updated_names: {
+            firstname: 'Michael Upd',
+            lastname: 'Brown Upd'
         },
         invalid: {
             missing_data: {

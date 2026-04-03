@@ -59,6 +59,17 @@ test.describe('Booking CRUD', () => {
         expect(body.firstname).toBe(testData.booking.updated.firstname);
     });
 
+     test('partially update booking', async ({ request }) => {
+        const response = await request.patch(testData.urls.api + `/booking/${createdBookingId}`, {
+            headers: { Cookie: `token=${token}` },
+            data: testData.booking.partially_updated_names
+        });
+        expect(response.status()).toBe(200);
+        const body = await response.json();
+        expect(body.firstname).toBe(testData.booking.partially_updated_names.firstname);
+        expect(body.lastname).toBe(testData.booking.partially_updated_names.lastname);
+    });    
+
     test('delete booking', async ({ request }) => {
         const response = await request.delete(testData.urls.api + `/booking/${createdBookingId}`, {
             headers: { Cookie: `token=${token}` },
