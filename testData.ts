@@ -38,6 +38,57 @@ export const testData = {
                 checkin: '2026-09-01',
                 checkout: '2026-09-08'
             }
+        },
+        invalid: {
+            missing_data: {
+                firstname: 'Michael',
+                lastname: 'Missing',
+                depositpaid: false,
+                bookingdates: {
+                    checkin: '2026-09-01',
+                    checkout: '2026-09-08'
+                }
+            },
+            wrong_date: {
+                firstname: 'Michael W',
+                lastname: 'Date',
+                totalprice: 400,
+                depositpaid: false,
+                bookingdates: {
+                    checkin: '2026-99-01',
+                    checkout: '2026-09-00'
+                }
+            },
+            missmatched_date: {
+                firstname: 'Michael W',
+                lastname: 'Date',
+                totalprice: 400,
+                depositpaid: false,
+                bookingdates: {
+                    checkin: '2026-10-05',
+                    checkout: '2026-09-01'
+                }
+            },
+            negative_price: {
+                firstname: 'Michael W',
+                lastname: 'Date',
+                totalprice: -333,
+                depositpaid: false,
+                bookingdates: {
+                    checkin: '2026-10-05',
+                    checkout: '2026-09-01'
+                }
+            },
+            empty_name: {
+                firstname: '',
+                lastname: '',
+                totalprice: 400,
+                depositpaid: false,
+                bookingdates: {
+                    checkin: '2026-10-05',
+                    checkout: '2026-09-01'
+                }
+            },
         }
     }
-};
+}

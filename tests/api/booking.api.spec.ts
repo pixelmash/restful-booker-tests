@@ -71,3 +71,45 @@ test.describe('Booking CRUD', () => {
         expect(response.status()).toBe(404);
     });
 });
+
+test.describe('Negative bookings', () => {
+    test.fail('create booking with missing required fields', async ({ request }) => {
+        const response = await request.post(testData.urls.api + `/booking`, {
+            data: testData.booking.invalid.missing_data
+        });
+        // API returns 500 instead of 400 for missing required fields
+        expect(response.status()).toBe(400);
+    });
+
+    test.fail('create booking with invalid date', async ({ request }) => {
+        const response = await request.post(testData.urls.api + '/booking', {
+            data: testData.booking.invalid.wrong_date
+        });
+        // Should return 400 but returns 200 - API accepts invalid dates
+        expect(response.status()).toBe(400);
+    });
+
+      test.fail('create booking with mismatched dates', async ({ request }) => {
+        const response = await request.post(testData.urls.api + '/booking', {
+            data: testData.booking.invalid.missmatched_date
+        });
+        // Should return 400 but returns 200 - No validation for incorrect date order
+        expect(response.status()).toBe(400);
+    });
+
+    test.fail('create booking with negative price', async ({ request }) => {
+        const response = await request.post(testData.urls.api + '/booking', {
+            data: testData.booking.invalid.negative_price
+        });
+        // Should return 400 but returns 200 - No validation for negative price value
+        expect(response.status()).toBe(400);
+    });
+
+    test.fail('create booking with empty names', async ({ request }) => {
+        const response = await request.post(testData.urls.api + '/booking', {
+            data: testData.booking.invalid.empty_name
+        });
+        // Should return 400 but returns 200 - No validation value length
+        expect(response.status()).toBe(400);
+    });
+});
