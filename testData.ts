@@ -94,5 +94,22 @@ export const testData = {
                 }
             },
         }
+    },
+    contactForm: {
+        valid: {
+        "name": "Robert Brown",
+        "email": "valid0@mail.com",
+        "phone": "11248163264",
+        "subject": "Subject 1",
+        "description": "Lorem ipsum dolor sid"
+        },
+
+        invalid: {
+        "name": "",
+        "email": "werwe",
+        "phone": "112244",
+        "subject": "Sue",
+        "description": "Lorem"
+        }
     }
 }
