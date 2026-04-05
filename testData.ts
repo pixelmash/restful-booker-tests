@@ -1,5 +1,69 @@
 import 'dotenv/config';
-export const testData = {
+interface TestData {
+    urls: Urls;
+    users: Users;
+    booking: Booking;
+    contactForm: ContactForm;
+}
+
+interface Urls {
+    ui?: string;
+    api?: string;
+}
+
+interface Users {
+    admin: Credentials;
+    api: Credentials;
+    api_invalid: Credentials;
+}
+
+interface Credentials {
+    username?: string;
+    password?: string;
+}
+
+interface Booking {
+    valid: BookingData;
+    invalid: BookingInvalid;
+    updated: BookingData;
+    partially_updated_names: Partial<BookingData>;
+}
+
+interface BookingData {
+    firstname: string;
+    lastname: string;
+    depositpaid?: boolean;
+    totalprice: number;
+    bookingdates: BookingDates;
+}
+
+interface BookingInvalid {
+    missing_data: Partial<BookingData>;
+    wrong_date: BookingData;
+    missmatched_date: BookingData;
+    negative_price: BookingData;
+    empty_name: BookingData;
+}
+interface BookingDates {
+    checkin: string;
+    checkout: string;
+}
+
+interface ContactForm {
+    valid: ContactData;
+    invalid: ContactData;
+}
+
+interface ContactData {
+    name: string;
+    email: string;
+    phone: string;
+    subject: string;
+    description: string;
+}
+
+
+export const testData: TestData = {
     urls: {
         ui: process.env.UI_BASE_URL,
         api: process.env.API_BASE_URL,
@@ -97,19 +161,19 @@ export const testData = {
     },
     contactForm: {
         valid: {
-        "name": "Robert Brown",
-        "email": "valid0@mail.com",
-        "phone": "11248163264",
-        "subject": "Subject 1",
-        "description": "Lorem ipsum dolor sid"
+            name: 'Robert Brown',
+            email: 'valid0@mail.com',
+            phone: '11248163264',
+            subject: 'Subject 1',
+            description: 'Lorem ipsum dolor sid'
         },
 
         invalid: {
-        "name": "",
-        "email": "werwe",
-        "phone": "112244",
-        "subject": "Sue",
-        "description": "Lorem"
+            name: '',
+            email: 'werwe',
+            phone: '112244',
+            subject: 'Sue',
+            description: 'Lorem'
         }
     }
 }
