@@ -4,6 +4,7 @@ interface TestData {
     users: Users;
     booking: Booking;
     contactForm: ContactForm;
+    reservationForm: ReservationForm;
 }
 
 interface Urls {
@@ -61,6 +62,19 @@ interface ContactData {
     subject: string;
     description: string;
 }
+
+interface ReservationData {
+    firstname: string;
+    lastname: string;
+    email: string;
+    phone: string;
+}
+
+interface ReservationForm {
+    valid: ReservationData;
+    invalid: ReservationData;
+}
+
 
 
 export const testData: TestData = {
@@ -175,5 +189,21 @@ export const testData: TestData = {
             subject: 'Sue',
             description: 'Lorem'
         }
+    },
+    reservationForm: {
+        valid: {
+            firstname: 'Michael',
+            lastname: 'Brown',
+            email: 'goodtest@test.com',
+            phone: '11248163264'
+        },
+        invalid: {
+            firstname: 'M',
+            lastname: 'Br',
+            email: 'Mbr@',
+            phone: '55698-5'
+        }
+
+
     }
 }

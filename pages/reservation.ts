@@ -21,4 +21,38 @@ export class ReservationPage {
             .filter({ has: this.page.getByRole('heading', { name: 'Room Policies' }) })
     }
 
+    bookThisRoom() {
+        return this.page.locator('.card-body')
+            .filter({ has: this.page.getByRole('heading', { name: 'Book This Room' }) })
+    }
+
+    bookingConfirmed() {
+        return this.page.locator('.card-body')
+            .filter({ has: this.page.getByRole('heading', { name: 'Booking Confirmed' }) })
+    }
+
+    async fillReservationForm(
+        firstname?: string,
+        lastname?: string,
+        email?: string,
+        phone?: string
+    ) {
+        if (firstname !== undefined) await this.bookThisRoom().getByLabel('Firstname').fill(firstname);
+        if (lastname !== undefined) await this.bookThisRoom().getByLabel('Lastname').fill(lastname);
+        if (email !== undefined) await this.bookThisRoom().getByLabel('Email').fill(email);
+        if (phone !== undefined) await this.bookThisRoom().getByLabel('Phone').fill(phone);
+    }
+
+    async openReservationForm() {
+        await this.bookThisRoom().getByRole('button', { name: 'Reserve Now' }).click();
+    }
+
+    async submitReservationForm() {
+        await this.bookThisRoom().getByRole('button', { name: 'Reserve Now' }).click();
+    }
+
+    async cancelReservationForm() {
+        await this.bookThisRoom().getByRole('button', { name: 'Cancel' }).click();
+    }
+
 }
