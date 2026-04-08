@@ -6,13 +6,13 @@ test.beforeEach(async ({ page }) => {
     await page.goto(testData.urls.ui as string, { waitUntil: 'networkidle' });
 });
 
-test('check the text headers', async ({ page }) => {
+test('Check the text headers', async ({ page }) => {
     const r = new RoomsPage(page);
     await expect(r.roomsSection().getByRole('heading', { name: 'Our Rooms' })).toBeVisible();
     await expect(r.roomsSection().getByText(/Comfortable beds/)).toBeVisible();
 });
 
-test('all room cards have required elements', async ({ page }) => {
+test('All room cards have required elements', async ({ page }) => {
     const r = new RoomsPage(page);
     const count = await r.roomCard().count();
     expect(count).toBeGreaterThan(0);
@@ -23,7 +23,7 @@ test('all room cards have required elements', async ({ page }) => {
     }
 });
 
-test('room cards badges', async ({ page }) => {
+test('Room cards badges', async ({ page }) => {
     const r = new RoomsPage(page);
     const count = await r.roomCard().count();
     for (let i = 0; i < count; i++) {
@@ -35,7 +35,7 @@ test('room cards badges', async ({ page }) => {
 });
 
 
-test('book now flow', async ({ page }) => {
+test('Book now flow', async ({ page }) => {
     const r = new RoomsPage(page);
     await r.clickBookNow();
     await page.waitForLoadState('networkidle');

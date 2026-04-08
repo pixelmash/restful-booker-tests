@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { testData } from '../../testData';
 
-test.fail('shows info message when when API returns no rooms', async ({ page }) => {
+test.fail('Shows info message when when API returns no rooms', async ({ page }) => {
     let rooms = Array();
     await page.route(testData.urls.ui + '/api/room', async route => {
         await route.fulfill({
@@ -16,7 +16,7 @@ test.fail('shows info message when when API returns no rooms', async ({ page }) 
     await expect(page.getByText("Sorry, there're no available rooms at the moment")).toBeVisible();
 });
 
-test.fail('shows info message when when API returns error', async ({ page }) => {
+test.fail('Shows info message when when API returns error', async ({ page }) => {
     await page.route(testData.urls.ui + '/api/room', async route => {
         const response = await route.fetch();
         const body = await response.json();

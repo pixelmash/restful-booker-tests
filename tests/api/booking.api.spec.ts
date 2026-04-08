@@ -6,7 +6,7 @@ test.describe.configure({ mode: 'serial' });
 let createdBookingId: number;
 let token: string;
 
-test('should return auth token', async ({ request }) => {
+test('Should return auth token', async ({ request }) => {
     const response = await request.post(testData.urls.api + '/auth', {
         data: { username: testData.users.api.username, password: testData.users.api.password }
     });
@@ -14,14 +14,14 @@ test('should return auth token', async ({ request }) => {
     token = body.token;
 });
 
-test('return all bookings', async ({ request }) => {
+test('Return all bookings', async ({ request }) => {
     const response = await request.get(testData.urls.api + `/booking`, {});
     const body = await response.json();
     expect(Array.isArray(body)).toBe(true);
     expect(body.length).toBeGreaterThan(0);
 });
 
-test('check one booking', async ({ request }) => {
+test('Check one booking', async ({ request }) => {
     const responseFull = await request.get(testData.urls.api + `/booking`, {});
     const bodyFull = await responseFull.json();
     // For stability - replace with create booking later (or hardcoded id)
@@ -42,14 +42,14 @@ test.describe('Booking CRUD', () => {
         createdBookingId = body.bookingid;
     });
 
-    test('get booking', async ({ request }) => {
+    test('Get booking', async ({ request }) => {
         const responseOne = await request.get(testData.urls.api + `/booking/${createdBookingId}`, {});
         const bodyOne = await responseOne.json();
         expect(responseOne.status()).toBe(200);
         expect(bodyOne.firstname).toBeDefined();
     });
 
-    test('update booking', async ({ request }) => {
+    test('Update booking', async ({ request }) => {
         const response = await request.put(testData.urls.api + `/booking/${createdBookingId}`, {
             headers: { Cookie: `token=${token}` },
             data: testData.booking.updated
@@ -59,7 +59,7 @@ test.describe('Booking CRUD', () => {
         expect(body.firstname).toBe(testData.booking.updated.firstname);
     });
 
-     test('partially update booking', async ({ request }) => {
+     test('Partially update booking', async ({ request }) => {
         const response = await request.patch(testData.urls.api + `/booking/${createdBookingId}`, {
             headers: { Cookie: `token=${token}` },
             data: testData.booking.partially_updated_names
@@ -70,14 +70,14 @@ test.describe('Booking CRUD', () => {
         expect(body.lastname).toBe(testData.booking.partially_updated_names.lastname);
     });    
 
-    test('delete booking', async ({ request }) => {
+    test('Delete booking', async ({ request }) => {
         const response = await request.delete(testData.urls.api + `/booking/${createdBookingId}`, {
             headers: { Cookie: `token=${token}` },
         });
         expect(response.status()).toBe(201);
     });
 
-    test('verify booking deleted', async ({ request }) => {
+    test('Verify booking deleted', async ({ request }) => {
         const response = await request.get(testData.urls.api + `/booking/${createdBookingId}`, {});
         expect(response.status()).toBe(404);
     });
@@ -92,7 +92,7 @@ test.describe('Negative bookings', () => {
         expect(response.status()).toBe(400);
     });
 
-    test.fail('create booking with invalid date', async ({ request }) => {
+    test.fail('Create booking with invalid date', async ({ request }) => {
         const response = await request.post(testData.urls.api + '/booking', {
             data: testData.booking.invalid.wrong_date
         });
@@ -100,7 +100,7 @@ test.describe('Negative bookings', () => {
         expect(response.status()).toBe(400);
     });
 
-      test.fail('create booking with mismatched dates', async ({ request }) => {
+      test.fail('Create booking with mismatched dates', async ({ request }) => {
         const response = await request.post(testData.urls.api + '/booking', {
             data: testData.booking.invalid.missmatched_date
         });
@@ -108,7 +108,7 @@ test.describe('Negative bookings', () => {
         expect(response.status()).toBe(400);
     });
 
-    test.fail('create booking with negative price', async ({ request }) => {
+    test.fail('Create booking with negative price', async ({ request }) => {
         const response = await request.post(testData.urls.api + '/booking', {
             data: testData.booking.invalid.negative_price
         });
@@ -116,7 +116,7 @@ test.describe('Negative bookings', () => {
         expect(response.status()).toBe(400);
     });
 
-    test.fail('create booking with empty names', async ({ request }) => {
+    test.fail('Create booking with empty names', async ({ request }) => {
         const response = await request.post(testData.urls.api + '/booking', {
             data: testData.booking.invalid.empty_name
         });
