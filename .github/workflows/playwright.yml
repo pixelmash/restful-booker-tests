@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -20,6 +25,7 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run tests
         run: npx playwright test --ignore-snapshots
+        continue-on-error: true
         env:
           ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME}}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD}}
@@ -27,3 +33,20 @@ jobs:
           API_PASSWORD: ${{ secrets.API_PASSWORD}}
           UI_BASE_URL: ${{ secrets.UI_BASE_URL}}
           API_BASE_URL: ${{ secrets.API_BASE_URL}}
+      - name: Generate Allure report
+        run: npx allure generate allure-results --clean
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: allure-report
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
