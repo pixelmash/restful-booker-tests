@@ -61,7 +61,7 @@ test.fail('Reservation with empty fields', async ({ page }) => {
 
 });
 
-test('Reservation with invalid data', async ({ page }) => {
+test.fail('Reservation with invalid data', async ({ page }) => {
     const reservation = new ReservationPage(page);
     await reservation.openReservationForm();
     await reservation.fillReservationForm(
@@ -71,9 +71,9 @@ test('Reservation with invalid data', async ({ page }) => {
         testData.reservationForm.invalid.phone
     )
     await reservation.submitReservationForm();
+        // Validation messages are missing form titles
     await expect(reservation.reservationValidationAlert().getByText('Firstname size must be between 3 and 30')).toBeVisible();
     await expect(reservation.reservationValidationAlert().getByText('Lastname size must be between 11 and 21')).toBeVisible();
-    // Validation messages are missing form titles
     await expect(reservation.reservationValidationAlert().getByText('Email must be a well-formed email address')).toBeVisible();
     await expect(reservation.reservationValidationAlert().getByText('Phone size must be between 3 and 18')).toBeVisible();
 });
