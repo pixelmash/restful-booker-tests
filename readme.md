@@ -71,6 +71,6 @@ playwright-restful-booker-tests/
 | auth.api.spec.ts | API Security: Verifies the /auth endpoint; checks that valid credentials return a token and invalid ones return a 403/401 unauthorized status |
 | booking.api.spec.ts | API CRUD & Business Logic: Full lifecycle of a booking (Create, Read, Update, Delete). Includes your "manual QA" edge cases like negative prices and invalid date ranges |
 | interception.api.spec.ts | UI Resilience (Mocking): Uses page.route to simulate API failures (500 errors) and empty states to verify the UI shows proper error messages/empty-list placeholders |
-| booking.k6.ts | Performance & Scalability: Simulates 10+ concurrent users creating bookings to measure response latency ($p95 < 500ms$) and system stability under load |
+| booking.k6.js | Performance & Scalability: Simulates 10+ concurrent users creating bookings to measure response latency ($p95 < 500ms$) and system stability under load |
 
 Known issues are documented in comments and are expected due to specific of learning project. Therefore covered by test.fail() clause.

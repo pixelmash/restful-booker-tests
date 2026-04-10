@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { testData } from '../../testData';
 
-test.fail('Shows info message when when API returns no rooms', async ({ page }) => {
+test.fail('Shows info message when API returns no rooms', async ({ page }) => {
     let rooms = Array();
     await page.route(testData.urls.ui + '/api/room', async route => {
         await route.fulfill({

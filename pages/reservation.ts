@@ -31,6 +31,11 @@ export class ReservationPage {
             .filter({ has: this.page.getByRole('heading', { name: 'Booking Confirmed' }) })
     }
 
+    reservationValidationAlert() {
+        return this.page.locator('.card-body')
+            .filter({ has: this.page.getByRole('alert') })
+    }
+
     async fillReservationForm(
         firstname?: string,
         lastname?: string,
