@@ -1,5 +1,6 @@
 [![Playwright Tests](https://github.com/pixelmash/restful-booker-tests/actions/workflows/playwright.yml/badge.svg)](https://github.com/pixelmash/restful-booker-tests/actions/workflows/playwright.yml)
 [![K6 Performance Tests](https://github.com/pixelmash/restful-booker-tests/actions/workflows/k6.yml/badge.svg)](https://github.com/pixelmash/restful-booker-tests/actions/workflows/k6.yml)
+[![Allure Reports](https://img.shields.io/badge/Allure%20Report-Latest-yellowgreen)](https://pixelmash.github.io/restful-booker-tests/)
 
 # Playwright Restful Booker project
 
@@ -12,6 +13,7 @@ Playwright test suite for https://restful-booker.herokuapp.com/ (API) and https:
 - TypeScript/JavaScript — test language
 - Node.js — runtime environment
 - GitHub Actions — CI/CD
+- Allure Reports - test run metrics
 
 ## Prerequisites
 

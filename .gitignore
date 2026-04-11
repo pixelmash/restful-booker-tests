@@ -8,5 +8,5 @@ node_modules/
 /playwright/.auth/
 .env
 test.htm
-allure-results
-allure-report
+allure-results/
+allure-report/
