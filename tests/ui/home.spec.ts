@@ -13,7 +13,7 @@ test('logo exists', async ({ page }) => {
     await expect(home.navSectionLogo()).toBeVisible();
 });
 
-test.fail('menu links lead to correct destinations', async ({ page }) => {
+test('menu links lead to correct destinations', async ({ page }) => {
     await home.navSectionLink('Rooms').click();
     await expect(home.roomsSection()).toBeInViewport();
     await expect(page).toHaveURL(/#rooms/);
@@ -21,11 +21,6 @@ test.fail('menu links lead to correct destinations', async ({ page }) => {
     await home.navSectionLink('Booking').click();
     await expect(home.bookingSection()).toBeInViewport();
     await expect(page).toHaveURL(/#booking/);
-
-    // BUG: Amenities section does not exist on the page
-    await home.navSectionLink('Amenities').click();
-    await expect(home.amenitiesSection()).toBeInViewport();
-    await expect(page).toHaveURL(/#amenities/);
 
     await home.navSectionLink('Location').click();
     await expect(home.locationSection()).toBeInViewport();
@@ -37,4 +32,10 @@ test.fail('menu links lead to correct destinations', async ({ page }) => {
 
     await home.navSectionLink('Admin').click();
     await expect(page).toHaveURL(/admin/);
+});
+
+test.fail('Amenities link has no target section', async ({ page }) => {
+    // BUG: Amenities section does not exist on the page
+    await home.navSectionLink('Amenities').click();
+    await expect(home.amenitiesSection()).toBeInViewport();
 });
