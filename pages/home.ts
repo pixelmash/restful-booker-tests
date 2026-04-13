@@ -24,6 +24,10 @@ export class HomePage {
     heroSectionText() {
         return this.heroSection().locator('p');
     }
+    heroSectionButton() {
+        return this.heroSection().getByRole('link');
+
+    }
     bookingSection() {
         return this.page.locator('#booking');
     }
@@ -33,15 +37,20 @@ export class HomePage {
     }
 
     bookingSectionCheckIn() {
-        return this.bookingSection().getByLabel('Check In');
+        return this.bookingSection().locator('input').first();
     }
 
     bookingSectionCheckOut() {
-        return this.bookingSection().getByLabel('Check Out');
+        return this.bookingSection().locator('input').last();
     }
 
     bookingSectionButton() {
-        return this.bookingSection().getByRole('button');
+        return this.bookingSection().getByRole('button', { name: 'Check Availability' });
+    }
+
+    bookingSectionAlert() {
+        return this.bookingSection()
+            .filter({ has: this.page.getByRole('alert') })
     }
 
     amenitiesSection() {
@@ -73,18 +82,30 @@ export class HomePage {
     }
 
     footerAbout() {
-        return this.footer().locator('div')
+        return this.footer().locator('.container')
             .filter({ has: this.page.getByRole('heading', { name: 'Shady Meadows B&B' }) });
     }
 
     footerContact() {
-        return this.footer().locator('div')
+        return this.footer().locator('.container')
             .filter({ has: this.page.getByRole('heading', { name: 'Contact Us' }) });
     }
 
     footerLinks() {
-        return this.footer().locator('div')
+        return this.footer().locator('.container')
             .filter({ has: this.page.getByRole('heading', { name: 'Quick Links' }) });
+    }
+
+    footerLink(text: string) {
+        return this.footerLinks().getByRole('link', { name: text });
+    }
+
+    subfooter() {
+        return this.footer().locator('small');
+    }
+
+    subfooterLink(text: string) {
+        return this.subfooter().getByRole('link', { name: text });
     }
 
 }
