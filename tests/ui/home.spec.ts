@@ -1,15 +1,10 @@
 import { test, expect } from '@playwright/test';
 import { testData } from '../../testData';
 import { HomePage } from '../../pages/home';
+import { severity } from "allure-js-commons";
+import { getFormattedDate } from '../../helpers/dataHelpers';
 
 let home: HomePage;
-function getFormattedDate(daysOffset = 0) {
-    const date = new Date();
-    date.setDate(date.getDate() + daysOffset);
-    return date.toLocaleDateString('en-GB');
-}
-
-
 
 test.beforeEach(async ({ page }) => {
     await page.goto(testData.urls.ui as string, { waitUntil: 'networkidle' });
@@ -17,6 +12,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('logo exists', async ({ page }) => {
+    await severity('critical'); 
     await expect(home.navSectionLogo()).toBeVisible();
 });
 
@@ -119,6 +115,7 @@ test('footer sections is visible', async ({ page }) => {
 });
 
 test.fail('footer links lead to correct denstinations', async ({ page }) => {
+    // BUG: Footer links are broken
     await home.footerLink('Home').click();
     await expect(page).toHaveURL(/#/);
 

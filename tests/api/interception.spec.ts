@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { testData } from '../../testData';
+import { createRooms } from '../../helpers/dataHelpers';
+
 
 test.fail('Shows info message when API returns no rooms', async ({ page }) => {
     let rooms = Array();
@@ -30,21 +32,7 @@ test.fail('Shows info message when when API returns error', async ({ page }) => 
 
 test('shows 2 rooms when API returns 2 rooms', async ({ page }) => {
     let rooms = Array();
-    for (let i = 0; i < 2; i++) {
-        rooms[i] = {
-            "roomid": i,
-            "roomName": `room${i}`,
-            "type": "Single",
-            "accessible": (i % 2 == 0), "image": `/images/room${i}.jpg`,
-            "description": `Aenean porttitor mauris sit amet lacinia molestie. ${i} In posuere accumsan aliquet. Maecenas sit amet nisl massa. Interdum et malesuada fames ac ante.`,
-            "features": [
-                `${i}`,
-                `${i + 1}`,
-                `${i + 2}`
-            ],
-            "roomPrice": i * 100
-        }
-    }
+    rooms = createRooms(2);
     await page.route(testData.urls.ui + '/api/room', async route => {
         await route.fulfill({
             status: 200,
